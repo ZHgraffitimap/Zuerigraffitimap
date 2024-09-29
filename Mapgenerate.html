@@ -1,0 +1,45 @@
+<div id="map" style="height: 500px; width: 100%;"></div>
+
+<script>
+  // Function to initialize the map
+  function initMap() {
+    var mapOptions = {
+      center: {lat: 47.3769, lng: 8.5417},  // Center the map on Zürich
+      zoom: 12,
+      mapId: '9be65e09818a108b'
+    };
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    // Fetch data from Google Sheets via Google Apps Script
+    fetch("https://script.google.com/macros/s/AKfycbxSeX12lKCJorLCPRLc6lcHch-RdA1Rpw_rl15aAfXluFRgOig_kJjdIJD_Jagyd-jhQA/exec")
+      .then(response => response.json())
+      .then(data => {
+        data.forEach(point => {
+          var marker = new google.maps.Marker({
+            position: {lat: parseFloat(point.latitude), lng: parseFloat(point.longitude)},
+            map: map,
+            title: point.title
+          });
+
+          // Create content for the InfoWindow with title, description, and image
+          var infowindow = new google.maps.InfoWindow({
+            content: `
+              <div>
+                <h3>${point.title}</h3>
+                <p>${point.description}</p>
+                <img src="${point.image}" alt="Graffiti Image" style="width:200px;">
+                <br>Submitted on: ${point.timestamp}
+              </div>`
+          });
+
+          // Add click listener to open the InfoWindow
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });
+        });
+      });
+  }
+</script>
+
+<!-- Load Google Maps JavaScript API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdYKHrhsqia5E7pHrPGuBlSFKcCSQCpj8&callback=initMap" async defer></script>
