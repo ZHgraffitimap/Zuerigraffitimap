@@ -22,38 +22,58 @@
 
     <div id="map" style="height: 500px; width: 100%;"></div>
 
-<script>
-  // Function to initialize the map
-  function initMap() {
-    var mapOptions = {
-      center: {lat: 47.3769, lng: 8.5417},  // Center the map on Zürich
-      zoom: 13
-    };
-    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-    // Fetch data from Google Sheets via Google Apps Script
-    fetch("https://script.google.com/macros/s/AKfycbxSeX12lKCJorLCPRLc6lcHch-RdA1Rpw_rl15aAfXluFRgOig_kJjdIJD_Jagyd-jhQA/exec")
-      .then(response => response.json())
-      .then(data => {
-        data.forEach(point => {
-          var marker = new google.maps.Marker({
-            position: {lat: parseFloat(point.latitude), lng: parseFloat(point.longitude)},
-            map: map,
-            title: "Graffiti location"
-          });
-
-          // Add a click event to show an info window with the description
-          var infowindow = new google.maps.InfoWindow({
-            content: `<div><p><strong>Description:</strong> ${point.image}</p><br>Submitted on: ${point.timestamp}</div>`
-          });
-
-          marker.addListener('click', function() {
-            infowindow.open(map, marker);
-          });
-        });
-      });
-  }
-</script>
+    <script>
+        // Function to initialize the map
+        function initMap() {
+          var mapOptions = {
+            center: {lat: 47.3769, lng: 8.5417},  // Center the map on Zürich
+            zoom: 13
+          };
+          var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      
+          // Variable to hold the currently open info window
+          var currentInfoWindow = null;
+      
+          // Fetch data from Google Sheets via Google Apps Script
+          fetch("https://script.google.com/macros/s/AKfycbxSeX12lKCJorLCPRLc6lcHch-RdA1Rpw_rl15aAfXluFRgOig_kJjdIJD_Jagyd-jhQA/exec")
+            .then(response => response.json())
+            .then(data => {
+              data.forEach(point => {
+                var marker = new google.maps.Marker({
+                  position: {lat: parseFloat(point.latitude), lng: parseFloat(point.longitude)},
+                  map: map,
+                  title: point.title
+                });
+      
+                // Create the content for the info window, including the image and description
+                var infowindowContent = `
+                  <div>
+                    <h3>${point.title}</h3>
+                    <p><strong>Description:</strong> ${point.description}</p>
+                    <p><strong>Submitted on:</strong> ${point.timestamp}</p>
+                    <img src="${point.image}" alt="Graffiti Image" style="width: 100%; height: auto; max-width: 200px;">
+                  </div>
+                `;
+      
+                var infowindow = new google.maps.InfoWindow({
+                  content: infowindowContent
+                });
+      
+                // Add a click event to the marker
+                marker.addListener('click', function() {
+                  // Close the currently open info window if there is one
+                  if (currentInfoWindow) {
+                    currentInfoWindow.close();
+                  }
+                  // Open the new info window and set it as the current one
+                  infowindow.open(map, marker);
+                  currentInfoWindow = infowindow;
+                });
+              });
+            });
+        }
+      </script>
+      
 
 <!-- Load Google Maps JavaScript API -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdYKHrhsqia5E7pHrPGuBlSFKcCSQCpj8&callback=initMap" async defer></script>
