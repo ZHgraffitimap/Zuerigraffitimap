@@ -5,21 +5,21 @@ body {
 }
 
 nav {
-    background-color: #333;
+    background-color: #565da5;
     overflow: hidden;
 }
 
 nav a {
     float: left;
     display: block;
-    color: white;
+    color: rgb(73, 142, 77);
     text-align: center;
     padding: 14px 20px;
     text-decoration: none;
 }
 
 nav a:hover {
-    background-color: #ddd;
+    background-color: #ac2f2f;
     color: black;
 }
 
