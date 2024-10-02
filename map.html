@@ -50,7 +50,7 @@
                   <div>
                     <h3>${point.title}</h3>
                     <p><strong>Description:</strong> ${point.description}</p>
-                    <p><strong>Submitted on:</strong> ${point.timestamp}</p>
+                    <p><strong>Submitted on:</strong> ${new Date(point.timestamp).toLocaleDateString()}</p>
                     <img src="${point.image}" alt="Graffiti Image" style="width: 100%; height: auto; max-width: 200px;">
                   </div>
                 `;
