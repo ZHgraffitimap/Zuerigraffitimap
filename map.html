@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+    </nav>
+
+    <div class="content">
+        <h1>Map</h1>
+        <p>Browse current Database.</p>
+    </div>
+
+    <div id="map" style="height: 500px; width: 100%;"></div>
+
+<script>
+  // Function to initialize the map
+  function initMap() {
+    var mapOptions = {
+      center: {lat: 47.3769, lng: 8.5417},  // Center the map on Zürich
+      zoom: 12
+    };
+    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    // Fetch data from Google Sheets via Google Apps Script
+    fetch("YOUR_WEB_APP_URL")
+      .then(response => response.json())
+      .then(data => {
+        data.forEach(point => {
+          var marker = new google.maps.Marker({
+            position: {lat: parseFloat(point.latitude), lng: parseFloat(point.longitude)},
+            map: map,
+            title: "Graffiti location"
+          });
+
+          // Add a click event to show an info window with the description
+          var infowindow = new google.maps.InfoWindow({
+            content: `<div><p><strong>Description:</strong> ${point.image}</p><br>Submitted on: ${point.timestamp}</div>`
+          });
+
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });
+        });
+      });
+  }
+</script>
+
+<!-- Load Google Maps JavaScript API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdYKHrhsqia5E7pHrPGuBlSFKcCSQCpj8&callback=initMap" async defer></script>
+
+
+    <script src="js/script.js"></script>
+</body>
+</html>
