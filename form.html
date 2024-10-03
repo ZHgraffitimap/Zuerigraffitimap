@@ -42,6 +42,24 @@
       
         <label for="description">Add a short description:</label>
         <input type="text" id="description" name="description" required><br><br>
+
+        <label for="type">Choose a tag:</label><br>
+        <select id="types" name="types">
+          <option value="Street Art">Street Art</option>
+          <option value="Mural">Mural</option>
+          <option value="Stencil">Stencil</option>
+          <option value="Graffiti">Graffiti</option>
+        </select><br><br>
+
+        <label for="motive">Choose a tag:</label><br>
+        <select id="motives" name="motives">
+          <option value="Carrot">Carrot</option>
+          <option value="Ghost">Ghost</option>
+          <option value="Flamingo">Flamingo</option>
+          <option value="Mushroom">Mushroom</option>
+          <option value="KCBR">KCBR</option>
+        </select><br><br>
+
       
         <label for="image">Graffiti Image (URL):</label><br>
         <input type="text" id="image" name="image" placeholder="Image URL" required><br><br>
@@ -118,7 +136,7 @@
             document.getElementById('mapModal').style.display = 'block';
             google.maps.event.trigger(map, 'resize');  // Refresh the map display after showing it
         }
-        
+
     </script>
 
     <!-- Google Maps API -->
