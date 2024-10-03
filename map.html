@@ -42,7 +42,9 @@
                 var marker = new google.maps.Marker({
                   position: {lat: parseFloat(point.latitude), lng: parseFloat(point.longitude)},
                   map: map,
-                  title: point.title
+                  title: point.title,
+                  type: point.type,
+                  motive: point.motive
                 });
       
                 // Create the content for the info window, including the image and description
