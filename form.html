@@ -45,19 +45,21 @@
 
         <label for="type">Choose a tag:</label><br>
         <select id="types" name="types">
-          <option value="Street Art">Street Art</option>
-          <option value="Mural">Mural</option>
-          <option value="Stencil">Stencil</option>
-          <option value="Graffiti">Graffiti</option>
+            <option value="-">None</option>
+            <option value="Street Art">Street Art</option>
+            <option value="Mural">Mural</option>
+            <option value="Stencil">Stencil</option>
+            <option value="Graffiti">Graffiti</option>
         </select><br><br>
 
         <label for="motive">Choose a tag:</label><br>
         <select id="motives" name="motives">
-          <option value="Carrot">Carrot</option>
-          <option value="Ghost">Ghost</option>
-          <option value="Flamingo">Flamingo</option>
-          <option value="Mushroom">Mushroom</option>
-          <option value="KCBR">KCBR</option>
+            <option value="-">None</option>
+            <option value="Carrot">Carrot</option>
+            <option value="Ghost">Ghost</option>
+            <option value="Flamingo">Flamingo</option>
+            <option value="Mushroom">Mushroom</option>
+            <option value="KCBR">KCBR</option>
         </select><br><br>
 
       
@@ -84,7 +86,7 @@
             
             var formData = new FormData(this);
 
-            fetch('https://script.google.com/macros/s/AKfycbxSeX12lKCJorLCPRLc6lcHch-RdA1Rpw_rl15aAfXluFRgOig_kJjdIJD_Jagyd-jhQA/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbyJjltxo5NeIU44XpYm3mJiH7ra3Q7lygSmgwfHmF-MMdW9itM0wn5xzTsUgIFaJABnOg/exec', {
                 method: 'POST',
                 body: formData
             })

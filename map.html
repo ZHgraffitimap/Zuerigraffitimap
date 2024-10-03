@@ -35,7 +35,7 @@
           var currentInfoWindow = null;
       
           // Fetch data from Google Sheets via Google Apps Script
-          fetch("https://script.google.com/macros/s/AKfycbxSeX12lKCJorLCPRLc6lcHch-RdA1Rpw_rl15aAfXluFRgOig_kJjdIJD_Jagyd-jhQA/exec")
+          fetch("https://script.google.com/macros/s/AKfycbyJjltxo5NeIU44XpYm3mJiH7ra3Q7lygSmgwfHmF-MMdW9itM0wn5xzTsUgIFaJABnOg/exec")
             .then(response => response.json())
             .then(data => {
               data.forEach(point => {
@@ -49,8 +49,10 @@
                 var infowindowContent = `
                   <div>
                     <h3>${point.title}</h3>
-                    <p><strong>Description:</strong> ${point.description}</p>
                     <p><strong>Submitted on:</strong> ${new Date(point.timestamp).toLocaleDateString()}</p>
+                    <p><strong>Description:</strong> ${point.description}</p>
+                    <p>${new Date(point.type).toLocaleDateString()}</p>
+                    <p>${new Date(point.motive).toLocaleDateString()}</p>
                     <img src="${point.image}" alt="Graffiti Image" style="width: 100%; height: auto; max-width: 200px;">
                   </div>
                 `;
