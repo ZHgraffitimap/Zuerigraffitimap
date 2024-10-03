@@ -34,9 +34,6 @@
     <div id="thankYouMessage">Thank you for your submission.</div>
 
     <form id="graffiti-form" enctype="multipart/form-data">
-        <label for="location">Choose Location:</label><br>
-        <button type="button" onclick="openMap()">Select on Map</button><br><br>
-      
         <label for="title">Add a title:</label>
         <input type="text" id="title" name="title" required><br><br>
       
@@ -66,6 +63,9 @@
         <label for="image">Graffiti Image (URL):</label><br>
         <input type="text" id="image" name="image" placeholder="Image URL" required><br><br>
       
+        <label for="location">Choose Location:</label><br>
+        <button type="button" onclick="openMap()">Select on Map</button><br><br>
+
         <!-- Hidden fields to store selected coordinates -->
         <input type="hidden" id="latitude" name="latitude">
         <input type="hidden" id="longitude" name="longitude">
